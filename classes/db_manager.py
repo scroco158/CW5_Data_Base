@@ -105,3 +105,7 @@ class DBManager:
 
         for num, item in enumerate(result, 1):
             print(num, item)
+
+
+#work_with_db = DBManager('course_work_5')
+#work_with_db.get_companies_and_vacancies_count()

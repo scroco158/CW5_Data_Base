@@ -1,5 +1,6 @@
 import requests
 
+
 class HHParser:
     def get_request(self):
         """ Получает 10 компаний с наибольшим количеством вакансий"""
@@ -59,12 +60,3 @@ class HHParser:
                 "employer": vacancy["employer"]["id"]
             })
         return filter_data
-
-
-
-
-
-hh = HHParser()
-#print(hh.get_request())
-#print(len(hh.get_vacancies_from_company(1942330)))
-print(len(hh.filter_vacancies()))

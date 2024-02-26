@@ -55,7 +55,3 @@ def insert_data_into_tables(db_name):
                              vacancy["url"], vacancy["employer"]))
     conn.close()
 
-
-create_database("course_work_5")
-create_tables("course_work_5")
-insert_data_into_tables("course_work_5")
