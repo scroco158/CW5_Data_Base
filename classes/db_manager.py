@@ -73,7 +73,7 @@ class DBManager:
         query = ("""
                  SELECT round(avg(salary_from))
                  FROM vacancies
-                 WHERE salary_from > (SELECT AVG(salary_from) from vacancies where salary_from <> 0)
+                 WHERE salary_from <> 0
         """)
         result = self.execute_query(query)
         print(result)
@@ -81,7 +81,7 @@ class DBManager:
         query = ("""
                  SELECT DISTINCT name, salary_from
                  FROM vacancies
-                 WHERE salary_from > (SELECT AVG(salary_from) from vacancies where salary_from <> 0)
+                 WHERE salary_from > (SELECT round(avg(salary_from)) FROM vacancies WHERE salary_from <> 0)
                  ORDER BY salary_from
                 """)
         result = self.execute_query(query)
@@ -107,5 +107,35 @@ class DBManager:
             print(num, item)
 
 
-#work_with_db = DBManager('course_work_5')
-#work_with_db.get_companies_and_vacancies_count()
+work_with_db = DBManager('course_work_5')
+# work_with_db.get_companies_and_vacancies_count()
+
+
+while True:
+    print('Выберите действие')
+    print('1  -- Получить список всех компаний и количество вакансий у каждой компании')
+    print('2  -- Получить список всех вакансий с указанием названия компании')
+    print('      названия вакансии и зарплаты и ссылки на вакансию')
+    print('3  -- Получить среднюю зарплату по вакансиям')
+    print('4  -- Получить список всех вакансий, у которых зарплата выше средней по всем вакансиям')
+    print('5  -- Получить список всех вакансий, в названии которых содержится переданное слово')
+    print('6  -- Выход')
+
+    user_sel = int(input('Ваш выбор ->'))
+
+    if user_sel == 1:
+        work_with_db.get_companies_and_vacancies_count()
+    elif user_sel == 2:
+        work_with_db.get_all_vacancies()
+    elif user_sel == 3:
+        work_with_db.get_avg_salary()
+    elif user_sel == 4:
+        work_with_db.get_vacancies_with_higher_salary()
+    elif user_sel == 5:
+        user_sel = input('Введите слово ->')
+        work_with_db.get_vacancies_with_keyword(user_sel)
+    elif 6:
+        break
+
+
+
